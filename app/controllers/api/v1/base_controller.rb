@@ -1,4 +1,22 @@
-class Api::V1::BaseController < ActionController::Base
+class Api::V1::BaseController < ApplicationController
+  respond_to :json
+  include DeviseTokenAuth::Concerns::SetUserByToken 
+
+  # before_action :configure_permitted_parameters, if: :devise_controller?
+
+  # # This allow to add extra permitted attributes for devise registration and account update
+  # def configure_permitted_parameters
+  #   devise_parameter_sanitizer.permit(:sign_up, {
+  #     keys: [
+  #       :civility, :first_name, :last_name, :birth_date, :optin_newsletters, :optin_partners_newsletters
+  #     ]
+  #   })
+  #   devise_parameter_sanitizer.permit(:account_update, {
+  #     keys: [
+  #       :civility, :first_name, :last_name, :birth_date, :optin_newsletters, :optin_partners_newsletters
+  #     ]
+  #   })
+  # end
 
   rescue_from StandardError,                with: :internal_server_error
 

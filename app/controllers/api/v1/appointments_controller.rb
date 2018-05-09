@@ -1,5 +1,5 @@
 class Api::V1::AppointmentsController < Api::V1::BaseController
   def index
-    @appointments = Appointment.all
+    @appointments = current_user.appointments
   end
 end
