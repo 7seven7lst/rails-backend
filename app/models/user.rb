@@ -6,4 +6,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
          
   has_many :appointments
+
+  protected
+  # I disable this method because I don't use the confirmable Devise module
+  def confirmation_required?
+    false
+  end
 end

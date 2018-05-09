@@ -1,6 +1,8 @@
-class Api::V1::BaseController < ApplicationController
+class Api::V1::BaseController <  ActionController::Base
+  include DeviseTokenAuth::Concerns::SetUserByToken
+  protect_from_forgery with: :null_session, only: Proc.new { |c| c.request.format.json? }
+  before_action :authenticate_user!
   respond_to :json
-  include DeviseTokenAuth::Concerns::SetUserByToken 
 
   # before_action :configure_permitted_parameters, if: :devise_controller?
 
