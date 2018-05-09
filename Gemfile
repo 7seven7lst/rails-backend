@@ -3,6 +3,7 @@ ruby '2.4.1'
 
 
 gem 'devise'
+gem 'devise_token_auth'
 gem 'figaro'
 gem 'jbuilder', '~> 2.0'
 gem 'pg', '~> 0.21'
