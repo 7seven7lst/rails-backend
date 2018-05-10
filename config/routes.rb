@@ -8,7 +8,7 @@ Rails.application.routes.draw do
         controllers: {
           sessions: 'api/v1/devise_token_auth/sessions'
         }
-      resources :appointments, only: [ :index, :show, :create, :update ]
+      resources :appointments, only: [ :index, :show, :create, :update, :destroy ]
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

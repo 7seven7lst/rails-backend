@@ -1,6 +1,6 @@
 class Api::V1::AppointmentsController < Api::V1::BaseController
 
-  before_action :set_appointment, only: [:show, :update]
+  before_action :set_appointment, only: [:show, :update, :destroy]
   def index
     @appointments = current_user.appointments
   end
@@ -19,6 +19,14 @@ class Api::V1::AppointmentsController < Api::V1::BaseController
 
   def update
     if @appointment.update(appointments_params)
+      render :json => @appointment.to_json
+    else
+      render :json => @appointment.errors.full_messages.to_json
+    end
+  end
+
+  def destroy
+    if @appointment.destroy
       render :json => @appointment.to_json
     else
       render :json => @appointment.errors.full_messages.to_json
