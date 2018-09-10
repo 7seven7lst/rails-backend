@@ -1,19 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { createHistory as history } from 'history';
+import Root from './root';
 
-import Main from './Main';
-import Signin from './Signin';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-ReactDOM.render(
-  <Router history={history}>
-    <div className="thin-container">
-      <Switch>
-        <Route path="/" exact component={Main} />
-        <Route path="/signin" exact component={Signin} />
-      </Switch>
-    </div>
-  </Router>,
-  document.getElementById('root')
-);
+document.addEventListener('DOMContentLoaded', () => {
+  ReactDOM.render(
+    <Root />,
+    document.getElementById('root')
+  )
+});
+

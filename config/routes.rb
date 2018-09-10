@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: 'pages#home'
-  get 'signin' , to: 'pages#home'
+  get 'login' , to: 'pages#home'
+  get 'signup', to: 'pages#home'
 
   #API
   namespace :api, defaults: { format: :json } do
