@@ -1,14 +1,10 @@
 import { createStore, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
-import { persistStore, autoRehydrate } from 'redux-persist';
-import storage from 'localforage';
+import { REHYDRATE, PURGE, persistCombineReducers, persistStore } from 'redux-persist';
+import { compose } from 'redux';
+import storage from 'redux-persist/lib/storage';
 import rootReducer from './modules';
-
-const persistConfig = {
-  key: 'auth',
-  storage,
-};
 
 const configureStore = () => {
   const middlewares = [thunk];
@@ -18,12 +14,18 @@ const configureStore = () => {
 
   const store = createStore(
     rootReducer,
-    applyMiddleware(...middlewares),
-    autoRehydrate(),
+    undefined,
+    compose(
+      applyMiddleware(...middlewares)
+    ),
   );
 
-  persistStore(store, persistConfig);
-  return store;
+  let persistor = persistStore(
+    store,
+    null,
+    () => { store.getState()}
+  );
+  return { persistor, store };
 };
 
 export default configureStore;

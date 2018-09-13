@@ -8,22 +8,29 @@ import SignupPage from './containers/signup.jsx';
 import NotFoundPage from './containers/notFound.jsx';
 import PrivateRoute from './containers/privateRoute.jsx';
 import configureStore from './configureStore.js';
+import { PersistGate } from 'redux-persist/integration/react';
 
-const store = configureStore();
+const { persistor, store } = configureStore();
 const history = createBrowserHistory();
 
 class Root extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Router history={history}>
-          <Switch>
-            <PrivateRoute exact path="/" component={HomePage} />
-            <Route exact path="/login" component={LoginPage} />
-            <Route exact path="/signup" component={SignupPage} />
-            <Route component={NotFoundPage} />
-          </Switch>
-        </Router>
+        <PersistGate
+          loading={<NotFoundPage />}
+          onBeforeLift={() => {}}
+          persistor={persistor}
+        >
+          <Router history={history}>
+            <Switch>
+              <PrivateRoute exact path="/" component={HomePage} />
+              <Route exact path="/login" component={LoginPage} />
+              <Route exact path="/signup" component={SignupPage} />
+              <Route component={NotFoundPage} />
+            </Switch>
+          </Router>
+        </PersistGate>
       </Provider>
     );
   }
