@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { authenticate } from '../modules/auth/actions';
 
@@ -23,10 +23,14 @@ class SignupPage extends React.Component {
     e.preventDefault();
     const { email, password, firstname, lastname, zipcode, phone, password_confirmation } = this.state;
     console.log("this.state is >>>", this.state);
+    const csrfToken = document.getElementsByTagName('meta')['csrf-token'].getAttribute('content')
+    console.log("metas is >>>",csrfToken);
+
     return axios({
       url: '/api/v1/auth',
       method: 'POST',
-      data: { email, password, password_confirmation }
+      //headers: {'X-CSRFToken': csrfToken},
+      data: { email, password }
     }).then(response => {
       console.log("response is>>>", response);
     }).catch(err => {
@@ -42,7 +46,6 @@ class SignupPage extends React.Component {
     return (
       <div className="container-fluid col-6 col-sm-6">
         <Form onSubmit={e => {this.handleSubmit(e)}}>
-          <FormText>Signup</FormText>
           <FormGroup>
             <Label for="signupEmail">Email</Label>
             <Input
@@ -120,7 +123,12 @@ class SignupPage extends React.Component {
               onChange={(e) => this.setState({ password_confirmation: e.target.value })}
             />
           </FormGroup>
-          <Button className="btn btn-primary">Submit</Button>
+          <FormGroup className="row justify-content-center">
+            <Button type="submit" color="primary">Submit</Button>
+          </FormGroup>
+          <FormGroup className="row justify-content-center">
+            <Link to="/login">Already have an accout? Go to Login</Link>
+          </FormGroup>
         </Form>
       </div>
     )
