@@ -22,9 +22,7 @@ class SignupPage extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const { email, password, firstname, lastname, zipcode, phone, password_confirmation } = this.state;
-    console.log("this.state is >>>", this.state);
     const csrfToken = document.getElementsByTagName('meta')['csrf-token'].getAttribute('content')
-    console.log("metas is >>>",csrfToken);
 
     return axios({
       url: '/api/v1/auth',
@@ -32,9 +30,9 @@ class SignupPage extends React.Component {
       //headers: {'X-CSRFToken': csrfToken},
       data: { email, password }
     }).then(response => {
-      console.log("response is>>>", response);
-    }).catch(err => {
-      console.log("err is >>>", err);
+      console.log(`response from signup is ${response}`);
+    }).catch(error => {
+      console.log(`error from signup is ${error}`);
     })
   }
 
