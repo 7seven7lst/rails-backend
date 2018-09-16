@@ -8,5 +8,5 @@
 // layout file, like app/views/layouts/application.html.erb
 
 console.log('Hello World from Webpacker')
-import "../test";
+import "../../front_end/test";
 import 'bootstrap/dist/js/bootstrap';

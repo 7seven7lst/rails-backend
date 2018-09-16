@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import { authenticate } from '../modules/auth/actions';
+import { authenticate } from '../../shared/modules/auth/actions';
 
 class LoginPage extends React.Component {
   constructor(props) {

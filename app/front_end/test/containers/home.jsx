@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as action from '../modules/auth/actions';
+import * as action from '../../shared/modules/auth/actions';
 import {
   Navbar,
   Nav,

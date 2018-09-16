@@ -3,7 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import { authenticate } from '../modules/auth/actions';
+import { authenticate } from '../../shared/modules/auth/actions';
 
 class SignupPage extends React.Component {
   constructor(props) {
