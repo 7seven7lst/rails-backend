@@ -4,7 +4,8 @@ import thunk from 'redux-thunk';
 import { REHYDRATE, PURGE, persistCombineReducers, persistStore } from 'redux-persist';
 import { compose } from 'redux';
 import storage from 'redux-persist/lib/storage';
-import rootReducer from '../shared/modules';
+import getRootReducer from '../shared/modules';
+import persistConfig from './persistConfig';
 
 const configureStore = () => {
   const middlewares = [thunk];
@@ -13,7 +14,7 @@ const configureStore = () => {
   }
 
   const store = createStore(
-    rootReducer,
+    getRootReducer(persistConfig),
     undefined,
     compose(
       applyMiddleware(...middlewares)
